@@ -2,10 +2,32 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>User Page</title>
+    <title>User Details</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
 </head>
 <body>
-<h1>Welcome to the User Page!</h1>
-<a href="/logout">Logout</a>
+<div class="sidebar">
+    <ul>
+        <li><a href="/">Main</a></li>
+        <li><a href="/register">Registration Panel</a></li>
+        <li><a href="/admin">Admin Panel</a></li>
+        <li><a href="/user">User Panel</a></li>
+        <li><a href="/logout">Logout</a></li>
+    </ul>
+</div>
+<div class="container">
+    <h1>User Details</h1>
+    <div class="user-details">
+        <p><strong>Username:</strong> <span th:text="${user.username}"></span></p>
+        <p><strong>First Name:</strong> <span th:text="${user.firstName}"></span></p>
+        <p><strong>Last Name:</strong> <span th:text="${user.lastName}"></span></p>
+        <p><strong>Age:</strong> <span th:text="${user.age}"></span></p>
+        <p><strong>Email:</strong> <span th:text="${user.email}"></span></p>
+        <p><strong>Roles:</strong>
+            <span th:each="role : ${user.roles}" th:text="${role.name}"></span>
+        </p>
+    </div>
+    <a href="/user/edit" class="submit-btn">Change Password</a>
+</div>
 </body>
 </html>

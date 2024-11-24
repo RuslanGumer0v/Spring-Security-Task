@@ -1,0 +1,135 @@
+/* Общие стили для всей страницы */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+/* Боковая панель */
+.sidebar {
+    width: 200px;
+    background-color: #1e3a8a;
+    color: white;
+    position: fixed;
+    height: 100%;
+    padding-top: 20px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+}
+
+.sidebar ul li a:hover {
+    background-color: #3744c0;
+}
+
+/* Основная часть */
+.container {
+    margin-left: 220px;
+    padding: 20px;
+    width: calc(100% - 220px);
+}
+
+/* Заголовки */
+h1 {
+    color: #1e3a8a;
+}
+
+/* Таблица */
+.user-table {
+    width: 80%;
+    margin: 20px 0;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+}
+
+.user-table th, .user-table td {
+    padding: 10px;
+    text-align: left;
+}
+
+.user-table th {
+    background-color: #1e3a8a;
+    color: white;
+}
+
+.user-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.user-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Кнопки */
+.add-user-btn, .action-link, .submit-btn, .back-link {
+    background-color: #1e3a8a;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.add-user-btn:hover, .action-link:hover, .submit-btn:hover, .back-link:hover {
+    background-color: #3744c0;
+}
+
+.submit-btn, .back-link {
+    margin-top: 20px;
+}
+
+/* Формы */
+.user-form .form-group {
+    margin-bottom: 15px;
+}
+
+.user-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.user-form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9em;
+}
+
+.user-form button {
+    background-color: #1e3a8a;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.user-form button:hover {
+    background-color: #3744c0;
+}
+
+/* Блоки с деталями пользователя */
+.user-details p {
+    margin: 10px 0;
+}

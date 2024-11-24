@@ -1,15 +1,17 @@
 package ru.itmentor.spring.boot_security.demo.model;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users_for_spring_security")
@@ -19,9 +21,29 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
+    @Size(min = 2, max = 30, message = "The username must be between 2 and 30 characters long")
+    @NotBlank(message = "username is required")
     private String username;
 
+    @Column//(nullable = false)
+    @Size(min = 2, max = 30, message = "The lastName must be between 2 and 30 characters long")
+    private String firstName;
+
+    @Column//(nullable = false)
+    @Size(min = 2, max = 30, message = "The lastName must be between 2 and 30 characters long")
+    private String lastName;
+
+    @Column//(nullable = false)
+    @Min(value = 0, message = "The age must be greater than zero")
+    private Integer age;
+
+    @Column//(nullable = false, unique = true)
+    @Email(message = "The email must be valid")
+    private String email;
+
+    @Column(nullable = false)
+//    @NotBlank(message = "Password is required")
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -36,8 +58,12 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String username, String password, Set<Role> roles) {
+    public User(String username, String firstName, String lastName, Integer age, String email, String password, Set<Role> roles) {
         this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.email = email;
         this.password = password;
         this.roles = roles;
     }
@@ -59,6 +85,38 @@ public class User implements UserDetails {
         this.username = username;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String getPassword() {
         return password;
@@ -78,10 +136,8 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // Используем getAuthority() для каждой роли, чтобы получить строку роли в нужном формате
-        return roles.stream()
-                .map(role -> new SimpleGrantedAuthority(role.getAuthority())) // Преобразуем строку роли в SimpleGrantedAuthority
-                .collect(Collectors.toList());
+        return roles;
+
     }
 
     @Override
@@ -122,6 +178,11 @@ public class User implements UserDetails {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
                 ", roles=" + roles +
                 '}';
     }
